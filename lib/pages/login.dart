@@ -144,8 +144,10 @@ checkIfEmpty<Widget>(TextEditingController nameController,
       if (foundUser == false) {
         userData.add(User(
             username: nameController.text, password: passwordController.text));
-        Navigator.pushReplacementNamed(context, '/shop',
-            arguments: {'username': nameController.text});
+        Navigator.pushReplacementNamed(
+          context,
+          '/shop',
+        );
       } else {
         newAlert(
             "This username is already taken! Please choose another!", context);
@@ -163,8 +165,10 @@ logInAccount(TextEditingController nameController,
     if (nameController.text == user.username) {
       if (passwordController.text == user.password) {
         succesfulLogin = true;
-        Navigator.pushReplacementNamed(context, '/shop',
-            arguments: {'username': nameController.text});
+        Navigator.pushReplacementNamed(
+          context,
+          '/shop',
+        );
       } else {
         newAlert("Password is incorrect!!!", context);
       }

@@ -24,7 +24,7 @@ class _ShopState extends State<Shop> {
 
   @override
   Widget build(BuildContext context) {
-    data =
+    dynamic data =
         ModalRoute.of(context)?.settings.arguments ?? {'username': "undefined"};
     return Scaffold(
       appBar: AppBar(

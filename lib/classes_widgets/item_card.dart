@@ -16,13 +16,11 @@ class _ItemCardState extends State<ItemCard> {
       margin: const EdgeInsets.all(10.0),
       child: Container(
         padding: EdgeInsets.all(10),
-        // width: 300,
-        // height: 300,
         child: Column(
           children: [
             Image(
               image: AssetImage(widget.item.url),
-              width: 100,
+              width: 150,
               fit: BoxFit.fill,
             ),
             const SizedBox(height: 10.0),
@@ -30,13 +28,28 @@ class _ItemCardState extends State<ItemCard> {
             Column(
               children: [
                 const SizedBox(height: 20.0),
-                FloatingActionButton.extended(
-                  focusElevation: 0,
-                  backgroundColor: Colors.white,
-                  label: const Text(
-                      style: TextStyle(color: Colors.amber), 'Add to cart'),
-                  onPressed: () {},
-                  icon: const Icon(color: Colors.amber, Icons.shopping_cart),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FloatingActionButton.extended(
+                      backgroundColor: Colors.white,
+                      label: const Text(
+                          style: TextStyle(color: Colors.amber), 'Details'),
+                      onPressed: () {
+                        showDetails();
+                      },
+                      icon: const Icon(color: Colors.amber, Icons.more),
+                    ),
+                    FloatingActionButton.extended(
+                      backgroundColor: Colors.white,
+                      label: const Text(
+                          style: TextStyle(color: Colors.amber), 'Add to cart'),
+                      onPressed: () {},
+                      icon:
+                          const Icon(color: Colors.amber, Icons.shopping_cart),
+                    ),
+                  ],
                 ),
                 Row(
                   children: [
@@ -72,4 +85,10 @@ class _ItemCardState extends State<ItemCard> {
       ),
     );
   }
+}
+
+showDetails() {
+  return Container(
+    child: Text('this item\' price is 1000\$'),
+  );
 }

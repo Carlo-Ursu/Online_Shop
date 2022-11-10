@@ -2,12 +2,14 @@ file:///Users/carloursu/Desktop/internship_shop/.dart_tool/flutter_build/54661fb
 file:///Users/carloursu/Desktop/internship_shop/.dart_tool/flutter_build/54661fb392efec035bc02b20ad4d9eff/web_plugin_registrant.dart
 file:///Users/carloursu/Desktop/internship_shop/.dart_tool/package_config.json
 file:///Users/carloursu/Desktop/internship_shop/lib/classes_widgets/item_card.dart
+file:///Users/carloursu/Desktop/internship_shop/lib/classes_widgets/routes.dart
 file:///Users/carloursu/Desktop/internship_shop/lib/classes_widgets/shopping_item.dart
 file:///Users/carloursu/Desktop/internship_shop/lib/classes_widgets/user.dart
 file:///Users/carloursu/Desktop/internship_shop/lib/firebase_options.dart
 file:///Users/carloursu/Desktop/internship_shop/lib/main.dart
 file:///Users/carloursu/Desktop/internship_shop/lib/pages/login.dart
 file:///Users/carloursu/Desktop/internship_shop/lib/pages/shop.dart
+file:///Users/carloursu/Desktop/internship_shop/lib/pages/shopping_cart.dart
 file:///Users/carloursu/Flutter_Dev/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/lib/async.dart
 file:///Users/carloursu/Flutter_Dev/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/lib/src/async_cache.dart
 file:///Users/carloursu/Flutter_Dev/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/lib/src/async_memoizer.dart

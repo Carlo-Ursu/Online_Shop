@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_cart_1/classes_widgets/user.dart';
+import 'package:shopping_cart_1/classes_widgets/routes.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Login extends StatelessWidget {
+  Login({super.key});
 
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
   TextEditingController nameController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
 
   String signIn = 'Sign in';
+
   String logIn = 'Log in';
 
   List<User> userData = [
@@ -146,7 +144,7 @@ checkIfEmpty<Widget>(TextEditingController nameController,
             username: nameController.text, password: passwordController.text));
         Navigator.pushReplacementNamed(
           context,
-          '/shop',
+          Routes.shop,
         );
       } else {
         newAlert(
@@ -167,7 +165,7 @@ logInAccount(TextEditingController nameController,
         succesfulLogin = true;
         Navigator.pushReplacementNamed(
           context,
-          '/shop',
+          Routes.shop,
         );
       } else {
         newAlert("Password is incorrect!!!", context);

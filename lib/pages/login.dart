@@ -1,6 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:shopping_cart_1/classes_widgets/user.dart';
-import 'package:shopping_cart_1/classes_widgets/routes.dart';
+import 'package:shopping_cart_1/pages/shop.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -142,10 +144,7 @@ checkIfEmpty<Widget>(TextEditingController nameController,
       if (foundUser == false) {
         userData.add(User(
             username: nameController.text, password: passwordController.text));
-        Navigator.pushReplacementNamed(
-          context,
-          Routes.shop,
-        );
+        goToOtherPage(context, Shop(newUsername: nameController.text), 'shop');
       } else {
         newAlert(
             "This username is already taken! Please choose another!", context);
@@ -163,10 +162,7 @@ logInAccount(TextEditingController nameController,
     if (nameController.text == user.username) {
       if (passwordController.text == user.password) {
         succesfulLogin = true;
-        Navigator.pushReplacementNamed(
-          context,
-          Routes.shop,
-        );
+        goToOtherPage(context, Shop(newUsername: nameController.text), 'shop');
       } else {
         newAlert("Password is incorrect!!!", context);
       }
@@ -181,4 +177,14 @@ newAlert(text, context) {
   return showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(content: Text(text)));
+}
+
+goToOtherPage(BuildContext context, Widget destination, String title) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => destination,
+      settings: RouteSettings(name: title),
+    ),
+  );
 }

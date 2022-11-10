@@ -36,9 +36,7 @@ class _ItemCardState extends State<ItemCard> {
                       backgroundColor: Colors.white,
                       label: const Text(
                           style: TextStyle(color: Colors.amber), 'Details'),
-                      onPressed: () {
-                        showDetails();
-                      },
+                      onPressed: () {},
                       icon: const Icon(color: Colors.amber, Icons.more),
                     ),
                     FloatingActionButton.extended(
@@ -85,10 +83,4 @@ class _ItemCardState extends State<ItemCard> {
       ),
     );
   }
-}
-
-showDetails() {
-  return Container(
-    child: Text('this item\' price is 1000\$'),
-  );
 }

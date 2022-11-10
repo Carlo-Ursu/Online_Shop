@@ -1,10 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:shopping_cart_1/classes_widgets/routes.dart';
+
 import 'package:shopping_cart_1/firebase_options.dart';
 import 'package:shopping_cart_1/pages/login.dart';
-import 'package:shopping_cart_1/pages/shop.dart';
-import 'package:shopping_cart_1/pages/shopping_cart.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,12 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Routes.login,
-      routes: {
-        Routes.login: (context) => Login(),
-        Routes.shop: (context) => Shop(),
-        Routes.cart: (context) => ShoppingCart(),
-      },
+      home: Login(),
       debugShowCheckedModeBanner: false,
     );
   }

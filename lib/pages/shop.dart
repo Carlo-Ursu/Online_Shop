@@ -22,7 +22,6 @@ class Shop extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   goToOtherPage(context, ShoppingCart(), 'cart');
-                  ;
                 },
                 icon: const Icon(Icons.shopping_basket)),
             IconButton(

@@ -1,18 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:shopping_cart_1/classes_widgets/user.dart';
+import 'package:shopping_cart_1/pages/shop.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Login extends StatelessWidget {
+  Login({super.key});
 
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
   TextEditingController nameController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
 
   String signIn = 'Sign in';
+
   String logIn = 'Log in';
 
   List<User> userData = [
@@ -144,8 +144,7 @@ checkIfEmpty<Widget>(TextEditingController nameController,
       if (foundUser == false) {
         userData.add(User(
             username: nameController.text, password: passwordController.text));
-        Navigator.pushReplacementNamed(context, '/shop',
-            arguments: {'username': nameController.text});
+        goToOtherPage(context, Shop(newUsername: nameController.text), 'shop');
       } else {
         newAlert(
             "This username is already taken! Please choose another!", context);
@@ -163,8 +162,7 @@ logInAccount(TextEditingController nameController,
     if (nameController.text == user.username) {
       if (passwordController.text == user.password) {
         succesfulLogin = true;
-        Navigator.pushReplacementNamed(context, '/shop',
-            arguments: {'username': nameController.text});
+        goToOtherPage(context, Shop(newUsername: nameController.text), 'shop');
       } else {
         newAlert("Password is incorrect!!!", context);
       }
@@ -179,4 +177,14 @@ newAlert(text, context) {
   return showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(content: Text(text)));
+}
+
+goToOtherPage(BuildContext context, Widget destination, String title) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => destination,
+      settings: RouteSettings(name: title),
+    ),
+  );
 }

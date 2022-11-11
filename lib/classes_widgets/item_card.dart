@@ -17,7 +17,7 @@ class _ItemCardState extends State<ItemCard> {
     return Card(
       margin: const EdgeInsets.all(10.0),
       child: Container(
-        width: 300,
+        width: 350,
         height: 350,
         padding: EdgeInsets.all(10),
         child: Column(
@@ -28,7 +28,14 @@ class _ItemCardState extends State<ItemCard> {
               height: 150,
               fit: BoxFit.cover,
             ),
-            Text(widget.item.title),
+            Text(
+              widget.item.title,
+              style: TextStyle(
+                color: Colors.amber,
+                fontWeight: FontWeight.bold,
+                fontSize: 19,
+              ),
+            ),
             const SizedBox(height: 10.0),
             Column(
               children: [
@@ -59,32 +66,6 @@ class _ItemCardState extends State<ItemCard> {
                     ),
                   ],
                 ),
-                // Row(
-                //   children: [
-                //     IconButton(
-                //       icon: const Icon(Icons.add),
-                //       splashRadius: 15.0,
-                //       onPressed: () {
-                //         setState(() {
-                //           widget.item.counter += 1;
-                //         });
-                //       },
-                //     ),
-                //     IconButton(
-                //       icon: const Icon(Icons.remove),
-                //       splashRadius: 15.0,
-                //       onPressed: () {
-                //         setState(() {
-                //           if (widget.item.counter == 0) {
-                //             widget.item.counter = 0;
-                //           } else {
-                //             widget.item.counter -= 1;
-                //           }
-                //         });
-                //       },
-                //     ),
-                //   ],
-                // ),
               ],
             ),
             SizedBox(height: 20.0),
@@ -114,9 +95,27 @@ class Details extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(item.price),
-          Text(item.url),
-          Text('${item.left}'),
+          Text(
+            item.price,
+            style: TextStyle(
+                color: Colors.amber,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w800),
+          ),
+          Text(
+            item.specs,
+            style: TextStyle(
+              color: Colors.amber,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          Text(
+            '${item.left}',
+            style: TextStyle(
+                color: Colors.amber,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w800),
+          ),
         ],
       ),
     );

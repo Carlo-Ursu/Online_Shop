@@ -2,18 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:shopping_cart_1/classes_widgets/shopping_item.dart';
+import 'package:shopping_cart_1/classes_widgets/data.dart';
 import 'package:shopping_cart_1/classes_widgets/item_card.dart';
+import 'package:shopping_cart_1/pages/login.dart';
+import 'package:shopping_cart_1/pages/shopping_cart.dart';
 
 class Shop extends StatelessWidget {
   Shop({super.key, required this.newUsername});
   String newUsername;
-
-  List<ShoppingItem> shoppingList = [
-    ShoppingItem(url: 'assets/imac.jpeg', price: '1000\$', counter: 0),
-    ShoppingItem(url: 'assets/macbookair.jpeg', price: '1100\$', counter: 0),
-    ShoppingItem(url: 'assets/macbookpro.jpeg', price: '1200\$', counter: 0),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +20,41 @@ class Shop extends StatelessWidget {
         actions: [
           ButtonBar(children: [
             IconButton(
-                onPressed: () {}, icon: const Icon(Icons.shopping_basket)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.logout)),
+                onPressed: () {
+                  goToOtherPage(context, ShoppingCart(), 'cart');
+                  ;
+                },
+                icon: const Icon(Icons.shopping_basket)),
+            IconButton(
+                onPressed: () {
+                  goToOtherPage(context, Login(), '/');
+                },
+                icon: const Icon(Icons.logout)),
           ])
         ],
       ),
       body: AlignedGridView.count(
         crossAxisCount: 1,
-        mainAxisSpacing: 2,
+        mainAxisSpacing: 3,
         crossAxisSpacing: 2,
         itemCount: 1,
         itemBuilder: (context, index) {
-          return Column(
-              children:
-                  shoppingList.map((item) => ItemCard(item: item)).toList());
+          return Wrap(
+            alignment: WrapAlignment.spaceAround,
+            children: shoppingList.map((item) => ItemCard(item: item)).toList(),
+          );
         },
       ),
     );
   }
+}
+
+goToOtherPage(BuildContext context, Widget destination, String title) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => destination,
+      settings: RouteSettings(name: title),
+    ),
+  );
 }

@@ -1,7 +1,15 @@
 class ShoppingItem {
-  String url = '';
-  String price = '';
-  int counter = 0;
+  String title;
+  String url;
+  String price;
+  int left = 0;
+  String specs;
 
-  ShoppingItem({required this.url, required this.price, required this.counter});
+  ShoppingItem({
+    required this.title,
+    required this.url,
+    required this.price,
+    required this.left,
+    required this.specs,
+  });
 }

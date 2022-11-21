@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:shopping_cart_1/classes_widgets/data.dart';
 import 'package:shopping_cart_1/classes_widgets/user.dart';
 import 'package:shopping_cart_1/pages/shop.dart';
 
@@ -14,14 +15,6 @@ class Login extends StatelessWidget {
   String signIn = 'Sign in';
 
   String logIn = 'Log in';
-
-  List<User> userData = [
-    User(username: 'ana', password: 'maria'),
-    User(username: 'carlo', password: 'ursu'),
-    User(username: 'clara', password: 'maria'),
-    User(username: 'parola', password: '123'),
-    User(username: 'alexia', password: 'abc'),
-  ];
 
   @override
   Widget build(BuildContext context) {

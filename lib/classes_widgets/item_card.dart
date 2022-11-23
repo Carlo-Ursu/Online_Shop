@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_cart_1/classes_widgets/item_details.dart';
 import 'package:shopping_cart_1/classes_widgets/shopping_item.dart';
 
 class ItemCard extends StatefulWidget {
@@ -44,9 +45,11 @@ class _ItemCardState extends State<ItemCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    FloatingActionButton.extended(
-                      isExtended: false,
-                      backgroundColor: Colors.white,
+                    ElevatedButton.icon(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                      ),
                       label: const Text(
                           style: TextStyle(color: Colors.amber), 'Details'),
                       onPressed: () {
@@ -56,11 +59,19 @@ class _ItemCardState extends State<ItemCard> {
                       },
                       icon: const Icon(color: Colors.amber, Icons.more),
                     ),
-                    FloatingActionButton.extended(
-                      backgroundColor: Colors.white,
+                    ElevatedButton.icon(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                      ),
                       label: const Text(
                           style: TextStyle(color: Colors.amber), 'Add to cart'),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          widget.item.isInCart = true;
+                          widget.item.counter = 1;
+                        });
+                      },
                       icon:
                           const Icon(color: Colors.amber, Icons.shopping_cart),
                     ),
@@ -85,39 +96,12 @@ class _ItemCardState extends State<ItemCard> {
   }
 }
 
-class Details extends StatelessWidget {
-  const Details({super.key, required this.item});
-  final ShoppingItem item;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(
-            item.price,
-            style: TextStyle(
-                color: Colors.amber,
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.w800),
-          ),
-          Text(
-            item.specs,
-            style: TextStyle(
-              color: Colors.amber,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-          Text(
-            '${item.left}',
-            style: TextStyle(
-                color: Colors.amber,
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.w800),
-          ),
-        ],
-      ),
-    );
-  }
+goToOtherPage(BuildContext context, Widget destination, String title) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => destination,
+      settings: RouteSettings(name: title),
+    ),
+  );
 }

@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:shopping_cart_1/classes_widgets/data.dart';
 import 'package:shopping_cart_1/classes_widgets/user.dart';
@@ -8,13 +6,13 @@ import 'package:shopping_cart_1/pages/shop.dart';
 class Login extends StatelessWidget {
   Login({super.key});
 
-  TextEditingController nameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  String signIn = 'Sign in';
+  final String signIn = 'Sign in';
 
-  String logIn = 'Log in';
+  final String logIn = 'Log in';
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +56,10 @@ class Login extends StatelessWidget {
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.amber)),
                           child: const Text(
-                              style: TextStyle(fontSize: 15.0), 'Login'),
+                              style: TextStyle(fontSize: 15.0), 'Sign up'),
                           onPressed: () {
                             checkIfEmpty(nameController, passwordController,
-                                context, 'Login', userData);
+                                context, 'Sign up', userData);
                           },
                         ),
                         ElevatedButton(
@@ -69,10 +67,10 @@ class Login extends StatelessWidget {
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.amber)),
                           child: const Text(
-                              style: TextStyle(fontSize: 15.0), 'Sign in'),
+                              style: TextStyle(fontSize: 15.0), 'Login'),
                           onPressed: () {
                             checkIfEmpty(nameController, passwordController,
-                                context, 'Sign in', userData);
+                                context, 'Login', userData);
                           },
                         ),
                       ],
@@ -129,7 +127,7 @@ checkIfEmpty<Widget>(TextEditingController nameController,
             title: Text('$action alert!'),
             content: const Text("Both fields have to be completed!!!")));
   } else {
-    if (action == 'Sign in') {
+    if (action == 'Sign up') {
       bool foundUser = false;
       for (var user in userData) {
         if (nameController.text == user.username) foundUser = true;
@@ -151,18 +149,21 @@ checkIfEmpty<Widget>(TextEditingController nameController,
 logInAccount(TextEditingController nameController,
     TextEditingController passwordController, userData, context) {
   bool succesfulLogin = false;
+  bool foundUser = false;
   for (var user in userData) {
     if (nameController.text == user.username) {
       if (passwordController.text == user.password) {
         succesfulLogin = true;
+        foundUser = true;
         goToOtherPage(context, Shop(newUsername: nameController.text), 'shop');
       } else {
+        foundUser = true;
         newAlert("Password is incorrect!!!", context);
       }
     }
   }
-  if (succesfulLogin == false) {
-    newAlert("Username does not exist!!! Please sign in!", context);
+  if (!foundUser && !succesfulLogin) {
+    newAlert("Username does not exist!!! Please sign up!", context);
   }
 }
 

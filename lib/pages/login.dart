@@ -135,7 +135,12 @@ checkIfEmpty<Widget>(TextEditingController nameController,
       if (foundUser == false) {
         userData.add(User(
             username: nameController.text, password: passwordController.text));
-        goToOtherPage(context, Shop(newUsername: nameController.text), 'shop');
+        goToOtherPage(
+            context,
+            Shop(
+              newUsername: nameController.text,
+            ),
+            'shop');
       } else {
         newAlert(
             "This username is already taken! Please choose another!", context);
@@ -155,7 +160,12 @@ logInAccount(TextEditingController nameController,
       if (passwordController.text == user.password) {
         succesfulLogin = true;
         foundUser = true;
-        goToOtherPage(context, Shop(newUsername: nameController.text), 'shop');
+        goToOtherPage(
+            context,
+            Shop(
+              newUsername: nameController.text,
+            ),
+            'shop');
       } else {
         foundUser = true;
         newAlert("Password is incorrect!!!", context);

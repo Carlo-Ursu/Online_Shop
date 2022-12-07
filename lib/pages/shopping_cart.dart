@@ -77,7 +77,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         Text(
                             style: TextStyle(color: Colors.amber, fontSize: 30),
                             'Total value'),
-                        Text('${initPrice()}',
+                        Text('${initPrice()}\$',
                             style:
                                 TextStyle(color: Colors.amber, fontSize: 25)),
                       ],

@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:shopping_cart_1/firebase_options.dart';
 import 'package:shopping_cart_1/pages/login.dart';
+import 'package:shopping_cart_1/pages/shop.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Login(),
+      home: Shop(
+        newUsername: '',
+      ),
       debugShowCheckedModeBanner: false,
     );
   }

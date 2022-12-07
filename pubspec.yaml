@@ -32,6 +32,9 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_core: ^2.1.1
+  http: ^0.13.5
+  carousel_slider: ^4.1.1
+  badges: ^2.0.3
 
 
 

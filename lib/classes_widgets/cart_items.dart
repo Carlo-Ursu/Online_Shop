@@ -10,7 +10,7 @@ class CartItem extends StatefulWidget {
       {super.key,
       required this.item,
       required this.finalPrice,
-      required this.callback});
+      required this.callback,});
 
   @override
   State<CartItem> createState() => _CartItemState();
@@ -27,34 +27,42 @@ class _CartItemState extends State<CartItem> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(widget.item.url),
+                  backgroundImage: NetworkImage(widget.item.thumbnail),
                   radius: 50,
                 ),
-                Text(
-                  widget.item.title,
-                  style: TextStyle(
-                    color: Colors.amber,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 19,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: Text(
+                    widget.item.title,
+                    style: TextStyle(
+                      color: Colors.amber,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 19,
+                    ),
                   ),
                 ),
                 Column(
                   children: [
                     IconButton(
+                      color: Colors.amber,
                       icon: const Icon(Icons.add),
                       splashRadius: 15.0,
                       onPressed: () {
                         setState(() {
-                          widget.item.counter += 1;
+                          if (widget.item.stock == widget.item.counter) {
+                            widget.item.counter = widget.item.stock;
+                          } else {
+                            widget.item.counter++;
+                          }
                           widget.callback();
                         });
                       },
                     ),
                     IconButton(
-                      style:
-                          IconButton.styleFrom(foregroundColor: Colors.amber),
+                      color: Colors.amber,
                       icon: const Icon(Icons.remove),
                       splashRadius: 15.0,
                       onPressed: () {
@@ -63,8 +71,8 @@ class _CartItemState extends State<CartItem> {
                             widget.item.counter = 0;
                           } else {
                             widget.item.counter -= 1;
-                            widget.callback();
                           }
+                          widget.callback();
                         });
                       },
                     ),
@@ -78,6 +86,17 @@ class _CartItemState extends State<CartItem> {
                   color: Colors.amber,
                   fontWeight: FontWeight.bold,
                   fontSize: 19),
+            ),
+            IconButton(
+              color: Colors.amber,
+              icon: const Icon(Icons.delete),
+              splashRadius: 15.0,
+              onPressed: () {
+                setState(() {
+                  widget.item.isInCart = false;
+                  widget.callback();
+                });
+              },
             ),
             Text(
               '${widget.item.counter * widget.item.price}\$',

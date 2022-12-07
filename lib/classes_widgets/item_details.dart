@@ -19,14 +19,16 @@ class Details extends StatelessWidget {
                 fontWeight: FontWeight.w800),
           ),
           Text(
-            item.specs,
+            item.specs.length > 10
+                ? '${item.specs.substring(0, 10)}...'
+                : item.specs,
             style: TextStyle(
               color: Colors.amber,
               fontStyle: FontStyle.italic,
             ),
           ),
           Text(
-            '${item.left}',
+            '${item.stock}',
             style: TextStyle(
                 color: Colors.amber,
                 fontStyle: FontStyle.italic,

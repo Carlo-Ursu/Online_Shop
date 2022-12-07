@@ -1,10 +1,15 @@
+import 'dart:core';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:http/http.dart';
 import 'package:shopping_cart_1/classes_widgets/data.dart';
 import 'package:shopping_cart_1/classes_widgets/item_card.dart';
+import 'package:shopping_cart_1/classes_widgets/shopping_api.dart';
 import 'package:shopping_cart_1/classes_widgets/shopping_item.dart';
 import 'package:shopping_cart_1/pages/login.dart';
 import 'package:shopping_cart_1/pages/shopping_cart.dart';
+import 'package:shopping_cart_1/classes_widgets/shopping_api.dart';
 
 class Shop extends StatefulWidget {
   Shop({super.key, required this.newUsername});
@@ -16,7 +21,33 @@ class Shop extends StatefulWidget {
 
 class _ShopState extends State<Shop> {
   String search = '';
-  Iterable<ShoppingItem> searchResults = shoppingList;
+  Iterable<ShoppingItem> searchResults = [];
+  int itemsInCart = 0;
+
+  badgeCallback() {
+    setState(() {
+      itemsInCart = 0;
+      for (var item in shoppingList) {
+        if (item.isInCart) {
+          itemsInCart += item.counter;
+        }
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getItems();
+  }
+
+  Future<void> getItems() async {
+    shoppingList = await ShoppingItemApi.getItem();
+    setState(() {
+      searchResults = shoppingList;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,16 +101,7 @@ class _ShopState extends State<Shop> {
         backgroundColor: Colors.amber[800],
         actions: [
           ButtonBar(children: [
-            IconButton(
-                onPressed: () {
-                  goToOtherPage(
-                      context,
-                      ShoppingCart(
-                        newUsername: widget.newUsername,
-                      ),
-                      'cart');
-                },
-                icon: const Icon(Icons.shopping_basket)),
+            numberItemsInCart(context),
             IconButton(
                 onPressed: () {
                   goToOtherPage(context, Login(), '/');
@@ -96,12 +118,52 @@ class _ShopState extends State<Shop> {
         itemBuilder: (context, index) {
           return Wrap(
             alignment: WrapAlignment.spaceAround,
-            children:
-                searchResults.map((item) => ItemCard(item: item)).toList(),
+            children: searchResults
+                .map((item) => ItemCard(
+                      item: item,
+                      itemsInCart: 0,
+                      badgeCallback: badgeCallback,
+                    ))
+                .toList(),
           );
         },
       ),
     );
+  }
+
+  Widget numberItemsInCart(BuildContext context) {
+    if (itemsInCart != 0) {
+      return Badge(
+        position: BadgePosition.topEnd(end: 0),
+        toAnimate: true,
+        badgeContent: Text('$itemsInCart'),
+        animationType: BadgeAnimationType.slide,
+        child: IconButton(
+            onPressed: () {
+              setState(() {
+                badgeCallback();
+              });
+              goToOtherPage(
+                  context,
+                  ShoppingCart(
+                    newUsername: widget.newUsername,
+                  ),
+                  'cart');
+            },
+            icon: const Icon(Icons.shopping_basket)),
+      );
+    } else {
+      return IconButton(
+          onPressed: () {
+            goToOtherPage(
+                context,
+                ShoppingCart(
+                  newUsername: widget.newUsername,
+                ),
+                'cart');
+          },
+          icon: const Icon(Icons.shopping_basket));
+    }
   }
 }
 
